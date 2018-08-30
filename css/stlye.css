@@ -122,6 +122,9 @@ width:250px;
 padding:10px;
     
 }
+#boxes .box img{
+    width:90px;
+}
 
 footer{
     padding:20px;
@@ -130,3 +133,4 @@ footer{
     background-color:#870c2a;
     text-align:center; 
 }
+
