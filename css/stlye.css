@@ -82,7 +82,7 @@ header .highlight, header .current a{
 } 
 
 header a:hover{
-    color:#cccccc;
+    color:#ccc000;
     font-weight:bold;
 }
 
@@ -90,9 +90,9 @@ header a:hover{
 
 #showcase{
     min-height:400px;
-    background:url('chickendance.jpg') no-repeat 0 -400px;
+   background: url("img_chickendance.jpg") no-repeat;
    text-align:center; 
-   color:#ffffff;
+   color:#000000;
 }
 
 #showcase h1{ 
@@ -168,13 +168,13 @@ ul#services{
     padding:20px;
     border:#cccccc solid 1px;
     margin-bottom:5px;
-    background:#e6e6e6;
+    background:#000000;
 }
 
 footer{
     padding:20px;
     margin-top:20px;
-    color:#ffffff;
+    color:#000000;
     background-color:#870c2a;
     text-align:center; 
 }
