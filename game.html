@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+<script type="text/javascript" src="processing.js"></script>
+</head>
+<body>
+
+
+<script type="text/processing">
+
+PImage background2;
+PImage tpose2;
+PImage spongeArmDown;
+PImage krabby_patty;
+int x; int Vx; int xy; int Vy;int gameState;
+
+void setup(){
+  gameState = 0;
+  size(1800,900);
+  background2 = loadImage("background2.jpg");
+  tpose2 = loadImage("tpose2.png");
+  krabby_patty = loadImage("krabby_patty.png");
+  Vy = 2;
+  Vx = 50;
+}
+
+
+void draw(){
+  //background image first
+  if(gameState == 0){
+  image(background2, x, 0);
+  image(background2, x+background2.width, 0);
+  if(x < -background2.width){
+    x=0;
+  }
+  image(tpose2, Vx, xy);
+  image(krabby_patty, 300,200);
+  xy = xy +Vy;
+  Vy++;
+  x--;
+  accerlerate();
+  checkBob();
+  }
+   if(gameState != 0){
+   fill(0);
+   textSize(40);
+   rect(280,200,200,45);
+   fill(255,0,0);
+   if(mouseX < 480 && mouseX > 245 && mouseY > 150 && mouseY > 100){
+     fill(255,255,255);
+     if(mousePressed){
+       gameState = 0;
+       xy = 100;
+     }
+   text("You lose", 300,245);
+  }
+  else if (gameState ==1){
+   
+  
+  }
+   }
+  
+}
+
+void accerlerate(){
+  if(mousePressed){
+    Vy = -10;
+  }
+}
+
+void checkBob(){
+ if(xy > height || xy < -100){
+   gameState =1; 
+ }
+}
+
+
+</script>
+
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+</body>
+</html>
