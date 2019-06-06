@@ -9,26 +9,50 @@
 
 
 <script type="text/processing">
+/**MY spongebob game
+  *Author: Julian Vara
+  *Version: 3.0
+  */
 
 PImage background2;
 PImage tpose2;
 PImage spongeArmDown;
-PImage krabby_patty;
+PImage krabby_patty2;
 int x; int Vx; int xy; int Vy;int gameState;
-
+int k; int Vk; int ky; int Kv;
+int score; int highscore;
+int  krabby_pattys = 3;
+int num_patty = 1;
+int[] bx = new int[num_patty]; int[] by = new int[num_patty]; 
+int[] lx = new int[krabby_pattys]; int[] ly = new int[krabby_pattys];
+int count;
+int px;
+int py;
+int timer;
 void setup(){
   gameState = 0;
   size(1800,900);
+  px = width/4;
+  py = height/2;
   background2 = loadImage("background2.jpg");
   tpose2 = loadImage("tpose2.png");
-  krabby_patty = loadImage("krabby_patty.png");
+  krabby_patty2 = loadImage("krabby_patty2.png");
   Vy = 2;
   Vx = 50;
+  for(int i =0; i < num_patty; i++){
+    lx[i] = width + (int)random(50, 200) + 200*i;
+    ly[i] = height/2 + (int)random(-250,250);
+  }
+  for(int i =0; i < num_patty; i++){
+    bx[i] = width + (int)random(50, 200) + 200*i;
+    by[i] = height/2 + (int)random(-250,250);
+  }
 }
 
 
 void draw(){
   //background image first
+  timer++;
   count++;
   move();
   if(score > highscore){
@@ -39,13 +63,19 @@ void draw(){
   image(background2, x+background2.width, 0);
   if(x < -background2.width){
     x=0;
+     fill(255);
+    textSize(18);
+    text("Score: " + score, width -170, 30);
+    text("High Score: " + highscore, width - 170, 50);
+    py = py + Vy;
+    Vy++;
   }
   image(tpose2, Vx, xy);
-  image(krabby_patty, 300,200);
+  
   xy = xy +Vy;
   Vy++;
   x--;
-  for(int i = 0; i < krabby_patty; i++)
+  for(int i = 0; i < krabby_pattys; i++)
   accerlerate();
   checkBob();
   }
@@ -67,14 +97,28 @@ void draw(){
   
   }
    }
+
+    for(int i = 0; i<num_patty; i=10){ 
+      bx[i]-= 2;
+      if(bx[i] < -10){
+        bx[i] = width + (int)random(50, 200);
+        by[i] = height/2 + (int)random(-250,250);
+      }
+      if(abs((int)((px+17)-(bx[i]+7))) < 22 && abs((int)((py+42) - (by[i]+41))) < 74){
+        bx[i]+=2000;
+        score+=5;
+        timer = -250;
+      }
+      image(krabby_patty2, bx[i], by[i]);
+    }
   
 }
 void move(){
   if (mouseX > Vx){    
-    Vx+=2;
+    Vx+=3;
   }
   else if(mouseX < Vx){
-    Vx-=2;
+    Vx-=3;
   }
 }
 
